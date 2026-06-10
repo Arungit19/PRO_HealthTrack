@@ -1,11 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+const parseOrigins = (value?: string) =>
+  value
+    ?.split(',')
+    .map((origin) => origin.trim().replace(/\/$/, ''))
+    .filter(Boolean) ?? [];
+
 const configuredOrigins = [
-  process.env.FRONTEND_URL,
-  process.env.NEXT_PUBLIC_FRONTEND_URL,
+  ...parseOrigins(process.env.FRONTEND_URL),
+  ...parseOrigins(process.env.FRONTEND_URLS),
+  ...parseOrigins(process.env.NEXT_PUBLIC_FRONTEND_URL),
   'http://localhost:3000',
   'http://localhost:3001',
-].filter(Boolean) as string[];
+];
 
 const corsHeaders = (origin: string) => ({
   'Access-Control-Allow-Origin': origin,
@@ -16,7 +23,7 @@ const corsHeaders = (origin: string) => ({
 });
 
 export function proxy(request: NextRequest) {
-  const origin = request.headers.get('origin');
+  const origin = request.headers.get('origin')?.replace(/\/$/, '');
   const isAllowedOrigin = origin && configuredOrigins.includes(origin);
 
   if (request.method === 'OPTIONS') {
