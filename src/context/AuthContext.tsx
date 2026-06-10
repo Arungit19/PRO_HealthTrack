@@ -2,6 +2,7 @@
 
 import React, { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 import { AppUser } from '@/types/users';
+import { apiFetch } from '@/lib/api';
 
 export interface AuthUser {
   id: string;
@@ -65,7 +66,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const login = async (email: string, password: string) => {
     try {
-      const response = await fetch('/api/auth/login', {
+      const response = await apiFetch('/api/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -90,7 +91,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const logout = () => {
-    void fetch('/api/auth/logout', { method: 'POST' });
+    void apiFetch('/api/auth/logout', { method: 'POST' });
     setUser(null);
     window.localStorage.removeItem(AUTH_STORAGE_KEY);
   };

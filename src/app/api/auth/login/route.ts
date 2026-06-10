@@ -30,7 +30,7 @@ export async function POST(request: NextRequest) {
       name: SESSION_COOKIE_NAME,
       value: authenticated.sessionToken,
       httpOnly: true,
-      sameSite: 'lax',
+      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
       secure: process.env.NODE_ENV === 'production',
       path: '/',
       maxAge: SESSION_DURATION_SECONDS,

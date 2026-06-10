@@ -18,6 +18,8 @@ export async function POST() {
     name: SESSION_COOKIE_NAME,
     value: '',
     path: '/',
+    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+    secure: process.env.NODE_ENV === 'production',
     maxAge: 0,
   });
   return response;

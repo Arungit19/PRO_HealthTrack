@@ -20,6 +20,10 @@
 # production
 /build
 
+# database backups
+/database/*.dump
+/database/pro_health.sql
+
 # misc
 .DS_Store
 *.pem

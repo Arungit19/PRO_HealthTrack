@@ -14,6 +14,7 @@ export const pool =
   globalForPg.pgPool ??
   new Pool({
     connectionString,
+    options: '-c search_path=public',
   });
 
 if (process.env.NODE_ENV !== 'production') {

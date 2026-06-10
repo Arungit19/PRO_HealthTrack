@@ -11,6 +11,7 @@ import {
   UserSubmission,
 } from '@/types/submissions';
 import { AppUser } from '@/types/users';
+import { apiFetch } from '@/lib/api';
 
 const statusStyles: Record<SubmissionStatus, string> = {
   Pending: 'bg-yellow-100 text-yellow-800 border-yellow-200',
@@ -87,7 +88,7 @@ export const AdminDashboard = () => {
     setDashboardError('');
 
     try {
-      const response = await fetch('/api/submissions');
+      const response = await apiFetch('/api/submissions');
 
       if (!response.ok) {
         throw new Error('Unable to load submissions');
@@ -112,7 +113,7 @@ export const AdminDashboard = () => {
 
   const loadUsers = useCallback(async () => {
     try {
-      const response = await fetch('/api/users');
+      const response = await apiFetch('/api/users');
       if (!response.ok) {
         throw new Error('Unable to load users');
       }
@@ -140,7 +141,7 @@ export const AdminDashboard = () => {
           period: analyticsPeriod,
           date: analyticsDate,
         });
-        const response = await fetch(`/api/analytics/reference?${params.toString()}`);
+        const response = await apiFetch(`/api/analytics/reference?${params.toString()}`);
 
         if (!response.ok) {
           throw new Error('Unable to load analytics');
@@ -163,7 +164,7 @@ export const AdminDashboard = () => {
           period: analyticsPeriod,
           date: analyticsDate,
         });
-        const response = await fetch(`/api/analytics/users?${params.toString()}`);
+        const response = await apiFetch(`/api/analytics/users?${params.toString()}`);
 
         if (!response.ok) {
           throw new Error('Unable to load user analytics');
@@ -183,7 +184,7 @@ export const AdminDashboard = () => {
     setDashboardError('');
 
     try {
-      const response = await fetch(`/api/submissions/${submissionId}/status`, {
+      const response = await apiFetch(`/api/submissions/${submissionId}/status`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -324,7 +325,7 @@ export const AdminDashboard = () => {
     setIsCreatingUser(true);
 
     try {
-      const response = await fetch('/api/users', {
+      const response = await apiFetch('/api/users', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -3,7 +3,7 @@ import { cookies } from 'next/headers';
 import { pool } from '@/lib/db';
 import { UserRole } from '@/types/users';
 
-export const SESSION_COOKIE_NAME = 'health_track _session';
+export const SESSION_COOKIE_NAME = 'health_track_session';
 export const SESSION_DURATION_SECONDS = 60 * 60 * 24 * 7;
 
 export const hashSessionToken = (token: string) =>

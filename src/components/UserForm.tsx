@@ -4,6 +4,7 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useAuth } from '@/context/AuthContext';
 import { useRouter } from 'next/navigation';
 import { DocumentUpload } from './DocumentUpload';
+import { apiFetch } from '@/lib/api';
 
 export const UserForm = () => {
   const { user, updateUser, logout } = useAuth();
@@ -101,7 +102,7 @@ export const UserForm = () => {
         }))
       );
 
-      const response = await fetch('/api/submissions', {
+      const response = await apiFetch('/api/submissions', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -166,7 +167,7 @@ export const UserForm = () => {
     setIsSavingProfile(true);
 
     try {
-      const response = await fetch(`/api/users/${user.id}`, {
+      const response = await apiFetch(`/api/users/${user.id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
