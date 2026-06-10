@@ -17,7 +17,6 @@ export const pool =
     ssl: {
       rejectUnauthorized: false,
     },
-    options: '-c search_path=public',
   });
 
 if (process.env.NODE_ENV !== 'production') {
