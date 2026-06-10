@@ -14,6 +14,9 @@ export const pool =
   globalForPg.pgPool ??
   new Pool({
     connectionString,
+    ssl: {
+      rejectUnauthorized: false, // Neon ke liye zaroori hai
+    },
     options: '-c search_path=public',
   });
 
