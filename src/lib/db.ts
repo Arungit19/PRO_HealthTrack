@@ -15,7 +15,7 @@ export const pool =
   new Pool({
     connectionString,
     ssl: {
-      rejectUnauthorized: false, // Neon ke liye zaroori hai
+      rejectUnauthorized: false,
     },
     options: '-c search_path=public',
   });
