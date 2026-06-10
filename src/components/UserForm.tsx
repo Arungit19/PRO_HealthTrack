@@ -355,7 +355,7 @@ export const UserForm = () => {
                   minLength={10}
                   maxLength={10}
                   className="w-full rounded-lg border border-slate-300 px-4 py-3 text-sm outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
-                  placeholder="Optional 10-digit phone number"
+                  placeholder=" 10-digit phone number"
                 />
               </div>
             </div>
